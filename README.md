@@ -34,3 +34,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Account
+# customer account:
+user:owakrusdi@gmail.com
+pw:selipanmahal
+
+# seller account:
+user:akujamed@gmail.com
+pw:kaloiribilangboss
+
+user:mulyono@gmail.com
+pw:hidupjokowi
+
+user:max.wesley2006@gmail.com
+pw:anak123
+
+oke now a question if i want to make the order steps in this project like this :
+customer add diffrent products from diffrent store to cart -> the customer checkout the all the products -> each respective seller recieve the order based on the product the user order 
+example:
+Order 1 → Seller A → items: [item1, item2]
+Order 2 → Seller B → items: [item3]
+Order 3 → Seller C → items: [item4, item5] -> Each seller sees ONLY their orders then the seller change the status to "pending(pending → processing → shipped → finished
+                              ↘ canceled)",
+                               and the customer only able to see it all their orders (from all sellers)
+grouped nicely
+
