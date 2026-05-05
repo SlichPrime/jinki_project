@@ -17,7 +17,7 @@ export default function CreateProduct() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // ✅ Check auth on mount
+  // Check auth on mount
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
 
@@ -40,11 +40,9 @@ export default function CreateProduct() {
 
   const handleSubmit = async () => {
     try {
-      // ✅ Parse numbers once
       const priceNum = Number(form.price);
       const stockNum = Number(form.stock);
 
-      // ✅ Validate required fields
       if (!form.name.trim()) {
         alert("Product name is required");
         return;
@@ -60,15 +58,12 @@ export default function CreateProduct() {
 
       setLoading(true);
 
-      // ✅ GET USER FROM LOCALSTORAGE
       const storedUser = localStorage.getItem("user");
       if (!storedUser) {
         alert("You must be logged in");
         return;
       }
       const user = JSON.parse(storedUser);
-
-      // 🔥 1. Upload image to Cloudinary
       let imageUrl = "";
 
       if (imageFile) {
@@ -94,7 +89,6 @@ export default function CreateProduct() {
         imageUrl = uploadData.secure_url;
       }
 
-      // 🔥 2. SAVE PRODUCT
       const token = localStorage.getItem("token");
 
       const res = await fetch("/api/products", {
@@ -119,7 +113,7 @@ export default function CreateProduct() {
         return;
       }
 
-      alert("✅ Product created!");
+      alert(" Product created!");
       router.push("/products");
 
     } catch (err) {

@@ -21,9 +21,7 @@ export default function AddProductPage() {
     });
   };
 
-  // ======================
   // UPLOAD IMAGE (Cloudinary)
-  // ======================
   const uploadImage = async () => {
     if (!file) return null;
 
@@ -43,16 +41,14 @@ export default function AddProductPage() {
     return result.secure_url;
   };
 
-  // ======================
   // SUBMIT PRODUCT
-  // ======================
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("token");
 
       let imageUrl = "";
       if (file) {
-        imageUrl = await uploadImage(); // 🔥 upload first
+        imageUrl = await uploadImage(); // upload first
       }
 
       const res = await fetch("/api/products", {
@@ -76,7 +72,7 @@ export default function AddProductPage() {
         return;
       }
 
-      alert("✅ Product created!");
+      alert("Product created!");
       window.location.href = "/products";
 
     } catch (err) {

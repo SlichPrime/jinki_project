@@ -47,16 +47,4 @@ pw:kaloiribilangboss
 user:mulyono@gmail.com
 pw:hidupjokowi
 
-user:max.wesley2006@gmail.com
-pw:anak123
-
-oke now a question if i want to make the order steps in this project like this :
-customer add diffrent products from diffrent store to cart -> the customer checkout the all the products -> each respective seller recieve the order based on the product the user order 
-example:
-Order 1 → Seller A → items: [item1, item2]
-Order 2 → Seller B → items: [item3]
-Order 3 → Seller C → items: [item4, item5] -> Each seller sees ONLY their orders then the seller change the status to "pending(pending → processing → shipped → finished
-                              ↘ canceled)",
-                               and the customer only able to see it all their orders (from all sellers)
-grouped nicely
 

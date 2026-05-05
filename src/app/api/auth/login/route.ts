@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     const { email, password } = await req.json();
 
-    // 🔍 FIND USER
+    // FIND USER
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 🔐 CHECK PASSWORD
+    // CHECK PASSWORD
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -29,13 +29,13 @@ export async function POST(req: Request) {
       );
     }
 
-    // 🔑 CREATE TOKEN
+    // CREATE TOKEN
 const token = signToken({
   id: user._id,
   role: user.role,
 });
 
-    // ✅ CLEAN USER OBJECT (IMPORTANT)
+    // CLEAN USER OBJECT (IMPORTANT)
     const cleanUser = {
       id: user._id,
       name: user.name || "",
@@ -46,7 +46,7 @@ const token = signToken({
       storeLocation: user.storeLocation || null,
     };
 
-    // ✅ RESPONSE
+    // RESPONSE
     return NextResponse.json({
       message: "Login success",
       token,

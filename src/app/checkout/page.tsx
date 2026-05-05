@@ -10,9 +10,9 @@ export default function CheckoutPage() {
   const [grouped, setGrouped] = useState<any>({});
   const [userId, setUserId] = useState("");
 
-  // =========================
+ 
   // FETCH CART
-  // =========================
+ 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -43,7 +43,6 @@ export default function CheckoutPage() {
       if (!acc[seller]) {
         acc[seller] = [];
       }
-
       acc[seller].push(item);
       return acc;
     }, {});
@@ -51,17 +50,14 @@ export default function CheckoutPage() {
     setGrouped(groupedData);
   }, [cart]);
 
-  // =========================
   // TOTAL
-  // =========================
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  // =========================
+  
   // CONFIRM CHECKOUT
-  // =========================
   const handleCheckout = async () => {
     const res = await fetch("/api/orders/checkout", {
       method: "POST",
@@ -78,10 +74,8 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Clear cart in localStorage and API
     localStorage.removeItem("cart");
-    
-    // Also clear cart in database
+
     await fetch("/api/cart", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

@@ -7,7 +7,6 @@ export async function PATCH(req: Request) {
   try {
     await connectDB();
 
-    // ✅ MUST await
     const user = await getUserFromRequest(req);
 
     if (!user) {
@@ -17,7 +16,6 @@ export async function PATCH(req: Request) {
       );
     }
 
-    // ✅ UPDATE ROLE (NOT isSeller)
     const updatedUser = await User.findByIdAndUpdate(
       user.id,
       { role: "seller" },

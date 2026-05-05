@@ -2,6 +2,7 @@
 
     import { useEffect, useState } from "react";
     import { useParams, useRouter } from "next/navigation";
+import user from "@/models/user";
 
     export default function ProductDetail() {
     const params = useParams();
@@ -11,10 +12,13 @@
     const [product, setProduct] = useState<any>(null);
     const [quantity, setQuantity] = useState(1);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isSeller, setIsSeller] = useState(false);
 
     useEffect(() => {
-          const user = localStorage.getItem("user");
-  setIsLoggedIn(!!user);
+          const userData = JSON.parse(localStorage.getItem("user") || "{}");
+
+        setIsLoggedIn(!!userData?.id);   
+        setIsSeller(userData?.role === "seller");
         const fetchProduct = async () => {
         const res = await fetch(`/api/products/${id}`);
         const data = await res.json();
@@ -154,16 +158,18 @@ const addToCart = async () => {
 
                     <button
   onClick={addToCart}
-  disabled={!isLoggedIn}
+  disabled={!isLoggedIn || isSeller}
   className={`w-full py-3 rounded-lg mt-6 font-medium transition-colors ${
-    isLoggedIn
-      ? "bg-blue-600 hover:bg-blue-700 text-white"
-      : "bg-gray-400 cursor-not-allowed text-white"
+    isLoggedIn && !isSeller
+  ? "bg-blue-600 hover:bg-blue-700 text-white"
+  : "bg-gray-400 cursor-not-allowed text-white"
   }`}
 >
-  {isLoggedIn
-    ? `Add to Cart - $${(product.price * quantity).toFixed(2)}`
-    : "Login to Add to Cart"}
+ {!isLoggedIn
+  ? "Login to Add to Cart"
+  : isSeller
+  ? "Seller Cannot Buy Products"
+  : `Add to Cart - $${(product.price * quantity).toFixed(2)}`}
 </button>
                 </div>
             </div>

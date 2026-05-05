@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
     const user = getUserFromRequest(req);
 
-    // ❌ NO TOKEN
+  
     if (!user) {
       return NextResponse.json(
         { error: "Unauthorized" },
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // ❌ NOT SELLER
+  
     if ((user.role as string) !== "seller" && (user.role as string) !== "admin") {
       return NextResponse.json(
         { error: "Only seller or admin can create product" },
@@ -38,8 +38,6 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-
-    // ✅ CREATE PRODUCT WITH AUTH USER
     const product = await Product.create({
       name: body.name,
       price: body.price,
@@ -47,7 +45,7 @@ export async function POST(req: Request) {
       stock: body.stock,
       image: body.image || "",
       description: body.description || "",
-      sellerId: user.id, // 🔥 FROM TOKEN (SAFE)
+      sellerId: user.id, 
     });
 
     return NextResponse.json({

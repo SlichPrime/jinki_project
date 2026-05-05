@@ -27,6 +27,10 @@ const OrderSchema = new mongoose.Schema(
       enum: ["pending", "processing", "shipped", "finished", "canceled"],
       default: "pending",
     },
+    isClosed: {
+  type: Boolean,
+  default: false,
+},
   },
   { timestamps: true }
 );

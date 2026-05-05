@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       address_line,
     } = await req.json();
 
-    // ✅ VALIDATION
+  
     if (!name) {
   return NextResponse.json(
     { message: "Username is required" },
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // ❌ CHECK EXISTING USER
+    // CHECK EXISTING USER
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -58,21 +58,19 @@ export async function POST(req: Request) {
       );
     }
 
-    // 🔐 HASH PASSWORD
+    //HASH PASSWORD
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ CREATE USER WITH FULL ADDRESS OBJECT
+    // CREATE USER WITH FULL ADDRESS OBJECT
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
       role: role || "customer",
 
-      // seller fields
       storeName: role === "seller" ? storeName : null,
       storeLocation: role === "seller" ? storeLocation : null,
 
-      // ✅ FIXED ADDRESS STRUCTURE
       address: {
         phone,
         city,

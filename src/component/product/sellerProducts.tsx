@@ -11,7 +11,7 @@ export default function SellerProducts({ userId }: any) {
       const res = await fetch("/api/products");
       const data = await res.json();
 
-      // ✅ filter only seller products - handle both populated and string sellerId
+    
       const filtered = data.filter((p: any) => {
         const productSellerId = p.sellerId?._id || p.sellerId;
         return productSellerId === userId;

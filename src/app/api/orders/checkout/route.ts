@@ -18,7 +18,6 @@ export async function POST(req: Request) {
     return Response.json({ error: "Cart empty" }, { status: 400 });
   }
 
-  // 🔥 GROUP ITEMS BY SELLER
   const grouped: Record<string, any[]> = {};
 
   for (const item of cart.items) {
@@ -35,7 +34,6 @@ export async function POST(req: Request) {
 
   const createdOrders = [];
 
-  // 🔥 CREATE ONE ORDER PER SELLER
   for (const sellerId in grouped) {
     const items = grouped[sellerId];
 
@@ -45,8 +43,8 @@ export async function POST(req: Request) {
     );
 
     const order = await Order.create({
-      userId: new mongoose.Types.ObjectId(userId),     // ✅ FIX
-      sellerId: new mongoose.Types.ObjectId(sellerId), // ✅ FIX
+      userId: new mongoose.Types.ObjectId(userId),     
+      sellerId: new mongoose.Types.ObjectId(sellerId), 
       items,
       totalPrice,
       status: "pending",
@@ -55,7 +53,6 @@ export async function POST(req: Request) {
     createdOrders.push(order);
   }
 
-  // 🔥 CLEAR CART
   cart.items = [];
   await cart.save();
 

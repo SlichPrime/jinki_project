@@ -123,7 +123,6 @@ export default function RegisterPage() {
         className="w-full border p-2 mb-3 rounded"
       />
 
-      {/* SELLER ONLY - Store Info instead of address */}
       {form.role === "seller" && (
         <div className="mt-4 rounded-lg border bg-white p-4 text-slate-800">
           <h2 className="font-bold mb-3">Store Information</h2>

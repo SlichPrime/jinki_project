@@ -2,9 +2,7 @@ import { connectDB } from "@/lib/mongodb";
 import Cart from "@/models/cart";
 import mongoose from "mongoose";
 
-// =======================
 // GET CART
-// =======================
 export async function GET(req: Request) {
   await connectDB();
 
@@ -31,9 +29,8 @@ export async function GET(req: Request) {
   return Response.json(cart);
 }
 
-// =======================
+
 // ADD TO CART
-// =======================
 export async function POST(req: Request) {
   await connectDB();
 
@@ -44,13 +41,11 @@ export async function POST(req: Request) {
     return Response.json({ error: "Missing data" }, { status: 400 });
   }
 
-  // Try to find cart with string userId first
   let cart = await Cart.findOne({ userId });
 
-  // If not found, try with ObjectId
+
   if (!cart && mongoose.Types.ObjectId.isValid(userId)) {
     cart = await Cart.findOne({ userId: new mongoose.Types.ObjectId(userId) });
-    // If found with ObjectId, use that userId for consistency
     if (cart) {
       userId = new mongoose.Types.ObjectId(userId).toString();
     }
@@ -120,9 +115,7 @@ export async function PUT(req: Request) {
   return Response.json(cart);
 }
 
-// =======================
 // DELETE ITEM / CLEAR CART
-// =======================
 export async function DELETE(req: Request) {
   await connectDB();
 

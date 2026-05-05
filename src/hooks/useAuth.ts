@@ -5,9 +5,7 @@ import { useState } from "react";
 export default function useAuth() {
   const [user, setUser] = useState<any>(null);
 
-  // ======================
   // LOGIN
-  // ======================
 const handleLogin = async (data: { email: string; password: string }) => {
   const res = await fetch("/api/auth/login", {
     method: "POST",
@@ -24,28 +22,26 @@ const handleLogin = async (data: { email: string; password: string }) => {
     return;
   }
 
-  // 🔥 THIS LINE WAS MISSING BEFORE
   localStorage.setItem("token", result.token);
 
-  // already correct
+
   localStorage.setItem(
   "user",
   JSON.stringify({
     ...result.user,
-    _id: result.user.id, // normalize
+    _id: result.user.id, 
   })
 );
 
   window.location.href = "/profile";
 };
 
-  // ======================
+ 
   // REGISTER
-  // ======================
+
   const handleRegister = async (data: any) => {
     try {
-      const res = await fetch("/api/auth/register", { // ✅ FIXED
-        method: "POST",
+      const res = await fetch("/api/auth/register", { // ✅ FIXE
         headers: {
           "Content-Type": "application/json",
         },

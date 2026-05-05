@@ -10,8 +10,7 @@ export async function GET(
 ) {
   await connectDB();
 
-  const { id } = await context.params; // ✅ MUST await
-
+  const { id } = await context.params; 
   const product = await Product.findById(id)
     .populate("sellerId", "name storeName storeLocation");
 
@@ -46,7 +45,7 @@ export async function DELETE(
 ) {
   await connectDB();
 
-  const { id } = await context.params; // ✅
+  const { id } = await context.params; 
 
   await Product.findByIdAndDelete(id);
 

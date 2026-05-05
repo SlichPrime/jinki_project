@@ -8,7 +8,7 @@ export async function PUT(req: Request) {
 
     const { userId, address } = await req.json();
 
-    // ✅ VALIDATION
+    // VALIDATION
     if (!userId) {
       return NextResponse.json(
         { message: "User ID is required" },
@@ -32,7 +32,7 @@ export async function PUT(req: Request) {
       );
     }
 
-    // 🔍 CHECK USER EXISTS
+    // CHECK USER EXISTS
     const existingUser = await User.findById(userId);
 
     if (!existingUser) {
@@ -42,7 +42,7 @@ export async function PUT(req: Request) {
       );
     }
 
-    // 🔥 UPDATE ADDRESS (force object format)
+    //UPDATE ADDRESS (force object format)
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
